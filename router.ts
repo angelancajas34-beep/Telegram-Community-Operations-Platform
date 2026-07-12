@@ -1,7 +1,7 @@
-import type { AppConfig } from "../config/env.ts";
-import type { Logger } from "../utils/logger.ts";
-import { handleGithubWebhook } from "../github/webhook.ts";
-import { handleHealth, handleMetrics } from "../health/handlers.ts";
+import type { AppConfig } from "./env.ts";
+import type { Logger } from "./logger.ts";
+import { handleGithubWebhook } from "./webhook.ts";
+import { handleHealth, handleMetrics } from "./handlers.ts";
 
 export interface RouterDeps {
   kv: Deno.Kv;
@@ -52,4 +52,3 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   });
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
-
