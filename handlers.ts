@@ -1,4 +1,4 @@
-import { Keys } from "../storage/schemas.ts";
+import { Keys } from "./schemas.ts";
 
 const VERSION = "2.3.2";
 

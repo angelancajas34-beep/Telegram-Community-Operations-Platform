@@ -1,12 +1,12 @@
-import { Keys } from "../storage/schemas.ts";
-import { formatTelegramMessage } from "../github/formatter.ts";
-import type { TelegramClient } from "../telegram/client.ts";
-import type { DeliveryRecord } from "../models/delivery.ts";
-import type { OutboxRecord } from "../models/outbox.ts";
-import { isQueueMessage } from "../models/outbox.ts";
-import type { ParsedGithubPayload } from "../models/event.ts";
-import type { GithubEventRecord } from "../models/event.ts";
-import type { Logger } from "../utils/logger.ts";
+import { Keys } from "./schemas.ts";
+import { formatTelegramMessage } from "./formatter.ts";
+import type { TelegramClient } from "./client.ts";
+import type { DeliveryRecord } from "./delivery.ts";
+import type { OutboxRecord } from "./outbox.ts";
+import { isQueueMessage } from "./outbox.ts";
+import type { ParsedGithubPayload } from "./event.ts";
+import type { GithubEventRecord } from "./event.ts";
+import type { Logger } from "./logger.ts";
 
 export interface QueueWorkerDeps {
   kv: Deno.Kv;
