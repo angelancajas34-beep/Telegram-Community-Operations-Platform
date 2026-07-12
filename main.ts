@@ -3,20 +3,20 @@
  * Entry point: wires config, KV, the queue worker, crash recovery, and the
  * HTTP server together.
  *
- * Reliability invariants enforced by this codebase (see docs/ARCHITECTURE.md):
+ * Reliability invariants enforced by this codebase (see ARCHITECTURE.md):
  *   1. HMAC-SHA-256 verified against raw bytes — before any JSON parsing
  *   2. X-GitHub-Delivery used as the idempotency key
- *   3. All five KV categories committed in one kv.atomic() — including enqueue()
+ *   3. All KV operations committed in one kv.atomic() — including enqueue()
  *   4. HTTP 200 returned only after a successful commit
  *   5. Telegram API called only inside the queue worker — never in the webhook handler
  */
 
-import { loadConfig } from "./src/config/env.ts";
-import { createLogger } from "./src/utils/logger.ts";
-import { getKv } from "./src/storage/kv.ts";
-import { createRouter } from "./src/http/router.ts";
-import { startQueueWorker, recoverPendingOutbox } from "./src/worker/queue.ts";
-import { createTelegramClient } from "./src/telegram/client.ts";
+import { loadConfig } from "./env.ts";
+import { createLogger } from "./logger.ts";
+import { getKv } from "./kv.ts";
+import { createRouter } from "./router.ts";
+import { startQueueWorker, recoverPendingOutbox } from "./queue.ts";
+import { createTelegramClient } from "./client.ts";
 
 const config = loadConfig();
 const logger = createLogger(config.logLevel);
