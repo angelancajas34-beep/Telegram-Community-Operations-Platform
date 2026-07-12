@@ -1,10 +1,10 @@
-import type { AppConfig } from "../config/env.ts";
-import type { Logger } from "../utils/logger.ts";
-import { sha256Hex, verifyHmacSha256 } from "../utils/crypto.ts";
-import { Keys } from "../storage/schemas.ts";
+import type { AppConfig } from "./env.ts";
+import type { Logger } from "./logger.ts";
+import { sha256Hex, verifyHmacSha256 } from "./crypto.ts";
+import { Keys } from "./schemas.ts";
 import { commitWebhook } from "./pipeline.ts";
 import { checkRateLimit } from "./rate_limit.ts";
-import { SUPPORTED_EVENT_TYPES } from "../models/event.ts";
+import { SUPPORTED_EVENT_TYPES } from "./event.ts";
 
 export interface WebhookDeps {
   kv: Deno.Kv;
@@ -26,7 +26,7 @@ export interface WebhookDeps {
  *   7. Return HTTP 200 only after a successful commit.
  *
  * The Telegram API is never called from this handler — only from the queue
- * worker (src/worker/queue.ts). This keeps webhook latency low and decouples
+ * worker (queue.ts). This keeps webhook latency low and decouples
  * GitHub's delivery timeout from Telegram's availability.
  */
 export async function handleGithubWebhook(req: Request, deps: WebhookDeps): Promise<Response> {
